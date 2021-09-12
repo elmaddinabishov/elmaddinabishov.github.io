@@ -1,0 +1,78 @@
+/* Elmaddin Abishov 
+
+my site - v1.0
+
+12.sep.2021
+
+bizi öldürməyən şey gücləndirir
+
+
+*/
+
+
+
+
+
+
+
+
+
+/* header */
+
+
+/* banner - head */
+.header .banner_head img{
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+/* banner - head - end */
+
+/* nav */
+.navbar_box{
+    background: #FFD525;
+}
+/* nav - end */
+
+/* header - end */
+
+/* slider */
+.slider_main{
+    background-color: rgb(44, 44, 44);
+    width: 100%;
+    height: 460px;
+}
+/* slider */
+
+/* news - box */
+.news_section{
+    margin: 30px 0;
+}
+
+.news_section .news_head{
+    background-color: #FFD525;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.news_section .news_box{
+    background-color: rgb(44, 44, 44);
+    width: 100%;
+    height: 250px;
+    margin: 0  0 20px;
+}
+/* news - box - end*/
+
+/* aside */
+
+/* banner-right */
+.aside .banner_right img {
+    width: 100%;
+    height: 380px;
+    margin-bottom: 30px;
+}
+/* banner-right - END*/
+
+
+/* aside -END */
