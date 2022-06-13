@@ -9,70 +9,72 @@ bizi öldürməyən şey gücləndirir
 
 */
 
+/*  
+Elmaddin Abishov  - iyirmibir - update: 2022 v2.0
+*/
 
+body{
+    background-image: url(../image/fon.png);
+    background-size: cover;
+}
 
-
-
-
-
-
-
-/* header */
-
-
-/* banner - head */
-.header .banner_head img{
+.background{
     width: 100%;
-    height: 80px;
-    object-fit: cover;
-}
-/* banner - head - end */
-
-/* nav */
-.navbar_box{
-    background: #FFD525;
-}
-/* nav - end */
-
-/* header - end */
-
-/* slider */
-.slider_main{
-    background-color: rgb(44, 44, 44);
-    width: 100%;
-    height: 460px;
-}
-/* slider */
-
-/* news - box */
-.news_section{
-    margin: 30px 0;
+    height: 80vh;
+    margin-top: 10vh;
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px);
+    background-color: #000;
+    opacity: 40%; */
+    display: flex;
+    justify-content: space-between;
 }
 
-.news_section .news_head{
-    background-color: #FFD525;
-    width: 100%;
-    height: 60px;
-    margin-bottom: 20px;
+.left_box .text_custom{
+    margin-bottom: 50px;
 }
 
-.news_section .news_box{
-    background-color: rgb(44, 44, 44);
-    width: 100%;
-    height: 250px;
-    margin: 0  0 20px;
+.left_box .text_custom .f1{
+    line-height: 50px;
+    font-weight: 700;
+    font-family: sans-serif;
+    font-size: 48px;
+    color: #fff;
 }
-/* news - box - end*/
 
-/* aside */
-
-/* banner-right */
-.aside .banner_right img {
-    width: 100%;
-    height: 380px;
-    margin-bottom: 30px;
+.left_box .text_custom .f2{
+    font-size: 22px;
+    font-family: 'FontAwesome';
+    color: #fff;
 }
-/* banner-right - END*/
 
+.left_box .social_box{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: left;
+}
 
-/* aside -END */
+.left_box .social_box li{
+    margin-right: 25px;
+}
+
+.left_box .social_box li a{
+    color: #fff;
+}
+
+/*  */
+
+.right_box .about_box li{
+    list-style: none;
+    border-top: 1px #fff solid;
+    padding: 10px 0;
+}
+.right_box .about_box li:last-child {
+    border-bottom: 1px #fff solid;
+}
+
+.right_box .about_box li a{
+    color: #fff;
+}
