@@ -28,6 +28,8 @@ body{
     opacity: 40%; */
     display: flex;
     justify-content: space-between;
+    background-image: url(https://terabox.com/s/1NRKrqH1wVPqTthBb0rZY6g);
+    background-size: cover;
 }
 
 .left_box .text_custom{
