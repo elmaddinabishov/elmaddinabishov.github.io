@@ -7,181 +7,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --bg:#1a1a2e;
-  --panel:#16213e;
-  --card:#0f3460;
-  --accent:#e94560;
-  --gold:#f5a623;
-  --text:#e8e8f0;
-  --sub:#8888aa;
-  --border:#2a2a4a;
-  --input-bg:#0d1b2a;
-  --radius:16px;
+  --bg:#1a1a2e;--panel:#16213e;--accent:#e94560;--gold:#f5a623;
+  --text:#e8e8f0;--sub:#8888aa;--border:#2a2a4a;--input-bg:#0d1b2a;--radius:16px;
 }
-
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Nunito',sans-serif;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
   padding:40px 16px 60px;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(233,69,96,.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(245,166,35,.06) 0%, transparent 60%);
+  background-image:radial-gradient(ellipse at 20% 20%,rgba(233,69,96,.08) 0%,transparent 60%),
+                   radial-gradient(ellipse at 80% 80%,rgba(245,166,35,.06) 0%,transparent 60%);
 }
-
-header{
-  text-align:center;
-  margin-bottom:40px;
-}
-header .icon{
-  font-size:3rem;
-  display:block;
-  margin-bottom:8px;
-  animation:float 3s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-}
+header{text-align:center;margin-bottom:40px;}
+header .icon{font-size:3rem;display:block;margin-bottom:8px;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 header h1{
-  font-family:'Lora',serif;
-  font-size:2.2rem;
-  font-weight:600;
+  font-family:'Lora',serif;font-size:2.2rem;font-weight:600;
   background:linear-gradient(135deg,var(--gold),var(--accent));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   letter-spacing:-.5px;
 }
-header p{
-  color:var(--sub);
-  font-size:.9rem;
-  margin-top:6px;
-}
-
+header p{color:var(--sub);font-size:.9rem;margin-top:6px;}
 .card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:32px;
-  width:100%;
-  max-width:680px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px;width:100%;max-width:680px;box-shadow:0 20px 60px rgba(0,0,0,.4);
 }
-
 .field{margin-bottom:24px;}
 .field label{
-  display:block;
-  font-size:.78rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  color:var(--gold);
-  margin-bottom:8px;
+  display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--gold);margin-bottom:8px;
 }
-
 .field input,.field textarea,.field select{
-  width:100%;
-  background:var(--input-bg);
-  border:1.5px solid var(--border);
-  border-radius:10px;
-  color:var(--text);
-  font-family:'Nunito',sans-serif;
-  font-size:.95rem;
-  padding:12px 16px;
-  outline:none;
-  transition:border-color .2s, box-shadow .2s;
-  resize:none;
+  width:100%;background:var(--input-bg);border:1.5px solid var(--border);
+  border-radius:10px;color:var(--text);font-family:'Nunito',sans-serif;
+  font-size:.95rem;padding:12px 16px;outline:none;
+  transition:border-color .2s,box-shadow .2s;resize:none;
 }
 .field input:focus,.field textarea:focus,.field select:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(245,166,35,.12);
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,.12);
 }
 .field textarea{min-height:260px;line-height:1.7;}
-.field select{cursor:pointer;}
-
-.options-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
+.options-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .tip{
-  background:rgba(245,166,35,.07);
-  border:1px solid rgba(245,166,35,.2);
-  border-radius:10px;
-  padding:12px 16px;
-  font-size:.82rem;
-  color:var(--sub);
-  line-height:1.6;
-  margin-bottom:24px;
+  background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);
+  border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--sub);
+  line-height:1.6;margin-bottom:24px;
 }
 .tip strong{color:var(--gold);}
-
 .btn{
-  width:100%;
-  background:linear-gradient(135deg,var(--accent),#c0392b);
-  border:none;
-  border-radius:12px;
-  color:#fff;
-  font-family:'Nunito',sans-serif;
-  font-size:1rem;
-  font-weight:700;
-  padding:16px;
-  cursor:pointer;
-  letter-spacing:.5px;
-  transition:transform .15s, box-shadow .2s, opacity .2s;
+  width:100%;background:linear-gradient(135deg,var(--accent),#c0392b);
+  border:none;border-radius:12px;color:#fff;font-family:'Nunito',sans-serif;
+  font-size:1rem;font-weight:700;padding:16px;cursor:pointer;
+  letter-spacing:.5px;transition:transform .15s,box-shadow .2s;
   box-shadow:0 6px 24px rgba(233,69,96,.35);
   display:flex;align-items:center;justify-content:center;gap:10px;
 }
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(233,69,96,.45);}
-.btn:active{transform:translateY(0);opacity:.9;}
-
-.preview-wrap{
-  margin-top:32px;
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--border);
-  display:none;
-}
-.preview-label{
-  background:var(--card);
-  padding:10px 16px;
-  font-size:.78rem;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  color:var(--sub);
-  font-weight:700;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.btn:active{transform:translateY(0);}
+.counter{text-align:right;font-size:.75rem;color:var(--sub);margin-top:4px;}
+.preview-wrap{margin-top:32px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);display:none;}
+.preview-label{background:#0f3460;padding:10px 16px;font-size:.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--sub);font-weight:700;display:flex;align-items:center;justify-content:space-between;}
 .preview-label span{color:var(--gold);}
-#preview-frame{
-  width:100%;
-  height:400px;
-  border:none;
-  background:#fff;
-}
-
-.counter{
-  text-align:right;
-  font-size:.75rem;
-  color:var(--sub);
-  margin-top:4px;
-}
-
-footer{
-  margin-top:48px;
-  text-align:center;
-  color:var(--sub);
-  font-size:.8rem;
-  line-height:1.8;
-}
+#preview-frame{width:100%;height:520px;border:none;background:#fff;}
+footer{margin-top:48px;text-align:center;color:var(--sub);font-size:.8rem;line-height:1.8;}
 </style>
 </head>
 <body>
@@ -189,35 +77,30 @@ footer{
 <header>
   <span class="icon">📖</span>
   <h1>Kitab Səhifəsi Generatoru</h1>
-  <p>Mətni yapışdır → HTML olaraq yüklə → GitHub-a əlavə et</p>
+  <p>Mətni yapışdır → Next/Prev ilə səhifə-səhifə oxu → GitHub-a yüklə</p>
 </header>
 
 <div class="card">
 
   <div class="field">
     <label>📌 Kitab / Fəsil Başlığı</label>
-    <input type="text" id="title" placeholder="məs. Dəmir Adam — Fəsil 3: Uğurun sirri" />
+    <input type="text" id="title" placeholder="məs. Dəmir Adam — Fəsil 3"/>
   </div>
 
   <div class="field">
     <label>✍️ Müəllif (isteğe bağlı)</label>
-    <input type="text" id="author" placeholder="məs. Napoleon Hill" />
+    <input type="text" id="author" placeholder="məs. Napoleon Hill"/>
   </div>
 
   <div class="field">
     <label>📄 Mətn — Kopyala yapışdır, heç nə düzəltmə</label>
-    <textarea id="content" placeholder="Bütün mətni buraya yapışdır. Nöqtə, vergül, boşluq — heç nəyi düzəltmə. Sistem özü avtomatik:
-• Cümlələri qruplaşdırar
-• Abzas boşluqları əlavə edər
-• Oxuma formatına salır
-
-Sadəcə yapışdır və yüklə!"></textarea>
-    <div class="counter"><span id="char-count">0</span> simvol · <span id="word-count">0</span> söz</div>
+    <textarea id="content" placeholder="Bütün mətni buraya yapışdır. Sistem özü:&#10;• Cümlələri qruplaşdırır&#10;• Abzaslara bölür&#10;• Avtomatik səhifə-səhifə paylanır&#10;• Oxuma yerini yadda saxlayır (localStorage)"></textarea>
+    <div class="counter"><span id="char-count">0</span> simvol · <span id="word-count">0</span> söz · ~<span id="page-est">0</span> səhifə</div>
   </div>
 
   <div class="options-row">
     <div class="field">
-      <label>🎨 Fon Temi</label>
+      <label>🎨 Oxuma Temi</label>
       <select id="theme">
         <option value="bookmate">Bookmate (Krem)</option>
         <option value="night">Gecə (Tünd)</option>
@@ -237,9 +120,28 @@ Sadəcə yapışdır və yüklə!"></textarea>
     </div>
   </div>
 
+  <div class="options-row">
+    <div class="field">
+      <label>📃 Hər Səhifədə Söz Sayı</label>
+      <select id="wordsperpage">
+        <option value="200">Az (200 söz)</option>
+        <option value="300" selected>Normal (300 söz)</option>
+        <option value="450">Çox (450 söz)</option>
+        <option value="600">Maksimum (600 söz)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>⌨️ Klaviatura ← → oxları</label>
+      <select id="keyboard">
+        <option value="yes" selected>Bəli (aktiv)</option>
+        <option value="no">Xeyr</option>
+      </select>
+    </div>
+  </div>
+
   <div class="tip">
-    <strong>💡 Avtomatik formatlaşdırma nə edir?</strong><br/>
-    Yapışdırdığın xam mətni götürür → cümlələri <strong>3–5 cümlədən ibarət abzaslara</strong> bölür → hər abzas arasına sətir boşluğu əlavə edir → əgər mətndə artıq abzas varsa, onları qoruyur. Sən heç nə düzəltmirsən.
+    <strong>📖 Necə işləyir?</strong><br/>
+    Mətni yapışdır → cümlələrə, abzaslara bölünür → seçdiyin söz sayına görə <strong>avtomatik səhifələnir</strong>. Oxuma yerin yadda saxlanır — sabah açsan qaldığın səhifədən davam edərsən. <strong>← →</strong> klaviatura oxları + <strong>sağ/sol sürüşdürmə</strong> ilə keçid.
   </div>
 
   <button class="btn" onclick="generate()">
@@ -254,317 +156,213 @@ Sadəcə yapışdır və yüklə!"></textarea>
 </div>
 
 <footer>
-  GitHub-a yükləmək üçün: <strong>elmaddinabishov.github.io</strong> repo → faylı əlavə et<br/>
-  Hər kitab üçün ayrı HTML fayl yaradılır
+  GitHub: <strong>elmaddinabishov.github.io</strong> → faylı əlavə et<br/>
+  Hər kitab ayrı HTML — Next/Prev, klaviatura, swipe, oxuma yeri yadda saxlanır
 </footer>
 
 <script>
-const textarea = document.getElementById('content');
-textarea.addEventListener('input', () => {
-  const v = textarea.value;
-  document.getElementById('char-count').textContent = v.length.toLocaleString();
-  document.getElementById('word-count').textContent = v.trim() ? v.trim().split(/\s+/).length.toLocaleString() : 0;
-});
-
 const THEMES = {
-  bookmate: {
-    pageBg:'#f4f1ea', textColor:'#2c2c2c', fontFamily:"'Lora', Georgia, serif",
-    bodyBg:'#e8e4d9', headerBg:'#f4f1ea', headerBorder:'#d4cfc4',
-    titleColor:'#1a1a1a', metaColor:'#888', progressBg:'#d4cfc4', progressFill:'#8b7355',
-    btnBg:'#8b7355', btnColor:'#fff', linkColor:'#6b5d45'
-  },
-  night: {
-    pageBg:'#1a1a1a', textColor:'#c8c8c8', fontFamily:"'Lora', Georgia, serif",
-    bodyBg:'#111', headerBg:'#1a1a1a', headerBorder:'#333',
-    titleColor:'#e0e0e0', metaColor:'#666', progressBg:'#333', progressFill:'#e94560',
-    btnBg:'#e94560', btnColor:'#fff', linkColor:'#e94560'
-  },
-  sepia: {
-    pageBg:'#fbf0d9', textColor:'#3b2f1e', fontFamily:"'Lora', Georgia, serif",
-    bodyBg:'#f0e4c8', headerBg:'#fbf0d9', headerBorder:'#d9c8a0',
-    titleColor:'#2a1f10', metaColor:'#9a7b50', progressBg:'#d9c8a0', progressFill:'#a0784a',
-    btnBg:'#a0784a', btnColor:'#fff', linkColor:'#7a5830'
-  },
-  white: {
-    pageBg:'#ffffff', textColor:'#1a1a1a', fontFamily:"'Lora', Georgia, serif",
-    bodyBg:'#f0f0f0', headerBg:'#fff', headerBorder:'#e0e0e0',
-    titleColor:'#000', metaColor:'#999', progressBg:'#e0e0e0', progressFill:'#333',
-    btnBg:'#222', btnColor:'#fff', linkColor:'#444'
-  },
-  'dark-blue': {
-    pageBg:'#0d1b2a', textColor:'#c8d8e8', fontFamily:"'Lora', Georgia, serif",
-    bodyBg:'#081420', headerBg:'#0d1b2a', headerBorder:'#1e3a5f',
-    titleColor:'#e8f4ff', metaColor:'#5588aa', progressBg:'#1e3a5f', progressFill:'#4a9eff',
-    btnBg:'#4a9eff', btnColor:'#fff', linkColor:'#4a9eff'
-  }
+  bookmate:{pageBg:'#f4f1ea',textColor:'#2c2c2c',ff:"'Lora',Georgia,serif",bodyBg:'#e8e4d9',hBg:'#f4f1ea',hBorder:'#d4cfc4',titleColor:'#1a1a1a',metaColor:'#888',pFill:'#8b7355',btnBg:'#8b7355',btnColor:'#fff',navBg:'#f4f1ea',navBorder:'#d4cfc4',pageBadgeBg:'#e8e4d9',pageBadgeColor:'#5c4a32'},
+  night:{pageBg:'#1a1a1a',textColor:'#c8c8c8',ff:"'Lora',Georgia,serif",bodyBg:'#111',hBg:'#1a1a1a',hBorder:'#333',titleColor:'#e0e0e0',metaColor:'#666',pFill:'#e94560',btnBg:'#e94560',btnColor:'#fff',navBg:'#1a1a1a',navBorder:'#333',pageBadgeBg:'#222',pageBadgeColor:'#e94560'},
+  sepia:{pageBg:'#fbf0d9',textColor:'#3b2f1e',ff:"'Lora',Georgia,serif",bodyBg:'#f0e4c8',hBg:'#fbf0d9',hBorder:'#d9c8a0',titleColor:'#2a1f10',metaColor:'#9a7b50',pFill:'#a0784a',btnBg:'#a0784a',btnColor:'#fff',navBg:'#fbf0d9',navBorder:'#d9c8a0',pageBadgeBg:'#f0e4c8',pageBadgeColor:'#6b4c28'},
+  white:{pageBg:'#ffffff',textColor:'#1a1a1a',ff:"'Lora',Georgia,serif",bodyBg:'#f0f0f0',hBg:'#fff',hBorder:'#e0e0e0',titleColor:'#000',metaColor:'#999',pFill:'#333',btnBg:'#222',btnColor:'#fff',navBg:'#fff',navBorder:'#e0e0e0',pageBadgeBg:'#f0f0f0',pageBadgeColor:'#333'},
+  'dark-blue':{pageBg:'#0d1b2a',textColor:'#c8d8e8',ff:"'Lora',Georgia,serif",bodyBg:'#081420',hBg:'#0d1b2a',hBorder:'#1e3a5f',titleColor:'#e8f4ff',metaColor:'#5588aa',pFill:'#4a9eff',btnBg:'#4a9eff',btnColor:'#fff',navBg:'#0d1b2a',navBorder:'#1e3a5f',pageBadgeBg:'#0a1828',pageBadgeColor:'#4a9eff'}
 };
 
+const ta = document.getElementById('content');
+const wppSel = document.getElementById('wordsperpage');
+
+function updateCounter() {
+  const v = ta.value;
+  const wc = v.trim() ? v.trim().split(/\s+/).length : 0;
+  const wpp = parseInt(wppSel.value) || 300;
+  document.getElementById('char-count').textContent = v.length.toLocaleString();
+  document.getElementById('word-count').textContent = wc.toLocaleString();
+  document.getElementById('page-est').textContent = wc ? Math.ceil(wc / wpp) : 0;
+}
+ta.addEventListener('input', updateCounter);
+wppSel.addEventListener('change', updateCounter);
+
+function escH(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').slice(0,60)||'kitab'; }
+
 function smartFormat(raw) {
-  if (!raw.trim()) return '';
-
-  // Normalize line endings
-  let text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
-  // Check if text already has paragraph breaks (2+ newlines)
+  if (!raw.trim()) return [];
+  let text = raw.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
   const hasParas = /\n\s*\n/.test(text);
-
-  let paragraphs = [];
-
+  let paras = [];
   if (hasParas) {
-    // Split on existing blank lines, keep existing structure
-    paragraphs = text.split(/\n\s*\n/).map(p => p.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean);
+    paras = text.split(/\n\s*\n/).map(p=>p.replace(/\n/g,' ').replace(/\s+/g,' ').trim()).filter(Boolean);
   } else {
-    // Single block — split into sentences and group
-    // First clean up single newlines (they're just line wraps)
-    text = text.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-
-    // Split into sentences (handles . ! ? followed by space and capital or end)
-    const sentenceRx = /[^.!?…]+(?:[.!?…]+(?:\s|$))+/g;
-    const sentences = [];
-    let match;
-    while ((match = sentenceRx.exec(text)) !== null) {
-      const s = match[0].trim();
-      if (s) sentences.push(s);
-    }
-    // If no sentences detected, fall back to word chunking
-    if (sentences.length < 2) {
-      const words = text.split(/\s+/);
-      const chunkSize = 60; // words per para
-      for (let i = 0; i < words.length; i += chunkSize) {
-        paragraphs.push(words.slice(i, i + chunkSize).join(' '));
-      }
+    text = text.replace(/\n/g,' ').replace(/\s+/g,' ').trim();
+    const rx = /[^.!?…]+(?:[.!?…]+(?:\s|$))+/g;
+    const sents=[]; let m;
+    while((m=rx.exec(text))!==null){ const s=m[0].trim(); if(s) sents.push(s); }
+    if (sents.length < 2) {
+      const w = text.split(/\s+/);
+      for(let i=0;i<w.length;i+=60) paras.push(w.slice(i,i+60).join(' '));
     } else {
-      // Group every 4 sentences into a paragraph
-      const GROUP = 4;
-      for (let i = 0; i < sentences.length; i += GROUP) {
-        paragraphs.push(sentences.slice(i, i + GROUP).join(' '));
-      }
+      for(let i=0;i<sents.length;i+=4) paras.push(sents.slice(i,i+4).join(' '));
     }
   }
-
-  return paragraphs.map(p => `<p>${escHtml(p)}</p>`).join('\n');
+  return paras.filter(Boolean);
 }
 
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function paginate(paras, wpp) {
+  const pages=[]; let cur=[],wc=0;
+  for (const p of paras) {
+    const pw=p.split(/\s+/).length;
+    if (wc+pw>wpp && cur.length>0){ pages.push(cur); cur=[]; wc=0; }
+    cur.push(p); wc+=pw;
+  }
+  if (cur.length) pages.push(cur);
+  return pages;
 }
 
-function slugify(s) {
-  return s.toLowerCase().replace(/[^a-z0-9ğüşıöçəа-яё]+/gi,'-').replace(/^-|-$/g,'').slice(0,60) || 'kitab';
-}
-
-function buildHTML(title, author, content, theme, fontSize) {
+function buildHTML(title, author, rawContent, theme, fontSize, wpp, keyboard) {
   const t = THEMES[theme] || THEMES.bookmate;
-  const formattedContent = smartFormat(content);
-  const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
-  const readMin = Math.ceil(wordCount / 200);
-  const dateStr = new Date().toLocaleDateString('az-AZ', {year:'numeric', month:'long', day:'numeric'});
+  const paras = smartFormat(rawContent);
+  const pages = paginate(paras, wpp);
+  const totalPages = pages.length;
+  const totalWords = rawContent.trim() ? rawContent.trim().split(/\s+/).length : 0;
+  const readMin = Math.ceil(totalWords / 200);
+  const dateStr = new Date().toLocaleDateString('az-AZ',{year:'numeric',month:'long',day:'numeric'});
+  const skey = `rp_${slugify(title)}`;
+  const useKb = keyboard === 'yes';
+  const pagesJS = JSON.stringify(pages.map(pg=>pg.map(p=>`<p>${escH(p)}</p>`).join('\n')));
 
   return `<!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>${escHtml(title)}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>${escH(title)}</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:${t.bodyBg};
-  color:${t.textColor};
-  font-family:${t.fontFamily};
-  line-height:1;
-  min-height:100vh;
-}
-
-/* ── PROGRESS BAR ── */
-#progress-bar{
-  position:fixed;top:0;left:0;z-index:999;
-  height:3px;width:0%;
-  background:${t.progressFill};
-  transition:width .1s linear;
-  border-radius:0 2px 2px 0;
-}
-
-/* ── HEADER ── */
-.book-header{
-  background:${t.headerBg};
-  border-bottom:1px solid ${t.headerBorder};
-  padding:20px 24px 16px;
-  position:sticky;top:0;z-index:100;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
-}
-.book-title{
-  font-size:1.15rem;
-  font-weight:600;
-  color:${t.titleColor};
-  margin-bottom:4px;
-  letter-spacing:-.2px;
-}
-.book-meta{
-  font-size:.8rem;
-  color:${t.metaColor};
-  font-family:sans-serif;
-  display:flex;gap:16px;flex-wrap:wrap;align-items:center;
-}
-.book-meta span::before{margin-right:4px;}
-
-/* ── CONTROLS ── */
-.controls{
-  display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;
-}
-.ctrl-btn{
-  background:${t.btnBg};
-  color:${t.btnColor};
-  border:none;border-radius:20px;
-  font-family:sans-serif;font-size:.78rem;font-weight:600;
-  padding:6px 14px;cursor:pointer;
-  transition:opacity .15s, transform .1s;
-}
-.ctrl-btn:active{opacity:.8;transform:scale(.97);}
-.ctrl-btn.ghost{
-  background:transparent;
-  border:1px solid ${t.headerBorder};
-  color:${t.metaColor};
-}
-
-/* ── MAIN CONTENT ── */
-.book-wrap{
-  max-width:680px;
-  margin:0 auto;
-  padding:48px 24px 100px;
-}
-
-.chapter-title{
-  font-size:1.9rem;
-  font-weight:600;
-  color:${t.titleColor};
-  line-height:1.3;
-  margin-bottom:8px;
-  letter-spacing:-.5px;
-}
-.chapter-author{
-  font-size:.95rem;
-  color:${t.metaColor};
-  font-family:sans-serif;
-  margin-bottom:40px;
-  font-style:italic;
-}
-.chapter-divider{
-  border:none;
-  border-top:1px solid ${t.headerBorder};
-  margin:32px 0;
-  opacity:.5;
-}
-
-.book-body p{
-  font-size:${fontSize}px;
-  line-height:1.9;
-  margin-bottom:1.6em;
-  text-align:justify;
-  -webkit-hyphens:auto;
-  hyphens:auto;
-  color:${t.textColor};
-}
-.book-body p:first-child::first-letter{
-  font-size:3.6em;
-  font-weight:600;
-  float:left;
-  line-height:.75;
-  margin:4px 10px 0 0;
-  color:${t.progressFill};
-}
-
-/* ── FOOTER ── */
-.book-footer{
-  text-align:center;
-  padding:40px 24px;
-  color:${t.metaColor};
-  font-family:sans-serif;
-  font-size:.8rem;
-  border-top:1px solid ${t.headerBorder};
-  max-width:680px;
-  margin:0 auto;
-}
-
-/* ── FONT SIZE CONTROLS ── */
+html,body{height:100%;}
+body{background:${t.bodyBg};color:${t.textColor};font-family:${t.ff};display:flex;flex-direction:column;min-height:100vh;}
+.top-bar{background:${t.hBg};border-bottom:1px solid ${t.hBorder};padding:14px 20px 10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.book-title-sm{font-size:1rem;font-weight:600;color:${t.titleColor};margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.book-meta{font-size:.75rem;color:${t.metaColor};font-family:sans-serif;display:flex;gap:12px;flex-wrap:wrap;}
+.top-ctrls{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.cbtn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:20px;font-family:sans-serif;font-size:.76rem;font-weight:600;padding:5px 13px;cursor:pointer;transition:opacity .15s;}
+.cbtn:active{opacity:.75;}
+.cbtn.g{background:transparent;border:1px solid ${t.hBorder};color:${t.metaColor};}
+.prog-wrap{margin-top:8px;height:3px;background:${t.hBorder};border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:${t.pFill};border-radius:2px;transition:width .35s ease;}
+.book-wrap{max-width:680px;margin:0 auto;padding:40px 22px 32px;flex:1;width:100%;}
+.ch-title{font-size:1.85rem;font-weight:600;color:${t.titleColor};line-height:1.3;margin-bottom:6px;letter-spacing:-.4px;}
+.ch-author{font-size:.92rem;color:${t.metaColor};font-family:sans-serif;font-style:italic;margin-bottom:32px;}
+.ch-hr{border:none;border-top:1px solid ${t.hBorder};margin:0 0 36px;opacity:.4;}
+#page-content{animation:fadeIn .22s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+#page-content p{font-size:${fontSize}px;line-height:1.95;margin-bottom:1.65em;text-align:justify;-webkit-hyphens:auto;hyphens:auto;color:${t.textColor};}
+#page-content p:first-child::first-letter{font-size:3.4em;font-weight:600;float:left;line-height:.75;margin:4px 10px 0 0;color:${t.pFill};}
+.bot-nav{background:${t.navBg};border-top:1px solid ${t.navBorder};padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;bottom:0;box-shadow:0 -2px 12px rgba(0,0,0,.07);}
+.nav-btn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:12px;font-family:sans-serif;font-size:.88rem;font-weight:700;padding:12px 22px;cursor:pointer;transition:transform .15s,opacity .15s;min-width:88px;box-shadow:0 3px 12px rgba(0,0,0,.15);}
+.nav-btn:hover{transform:translateY(-1px);}
+.nav-btn:active{transform:scale(.96);}
+.nav-btn:disabled{opacity:.28;cursor:default;transform:none;}
+.page-badge{background:${t.pageBadgeBg};color:${t.pageBadgeColor};border:1px solid ${t.navBorder};border-radius:20px;font-family:sans-serif;font-size:.84rem;font-weight:700;padding:8px 16px;text-align:center;white-space:nowrap;min-width:100px;cursor:pointer;}
+.page-badge small{font-size:.68rem;opacity:.65;display:block;}
+.hint{text-align:center;font-family:sans-serif;font-size:.7rem;color:${t.metaColor};padding:6px;opacity:.5;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:${t.hBg};border:1px solid ${t.hBorder};border-radius:16px;padding:24px;width:260px;text-align:center;}
+.modal-box h3{color:${t.titleColor};font-family:sans-serif;font-size:1rem;margin-bottom:16px;}
+.modal-box input{width:100%;background:${t.bodyBg};border:1px solid ${t.hBorder};border-radius:8px;color:${t.textColor};font-family:sans-serif;font-size:1rem;padding:10px;text-align:center;outline:none;margin-bottom:12px;}
+.modal-box .mbtn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:8px;font-family:sans-serif;font-size:.9rem;font-weight:700;padding:10px 20px;cursor:pointer;margin:4px;}
 </style>
 </head>
 <body>
-<div id="progress-bar"></div>
-
-<div class="book-header">
-  <div class="book-title">${escHtml(title)}</div>
+<div class="top-bar">
+  <div class="book-title-sm">${escH(title)}</div>
   <div class="book-meta">
-    ${author ? `<span>✍️ ${escHtml(author)}</span>` : ''}
-    <span>📖 ~${readMin} dəq oxuma</span>
-    <span>📝 ${wordCount.toLocaleString()} söz</span>
-    <span>📅 ${dateStr}</span>
+    ${author?`<span>✍️ ${escH(author)}</span>`:''}
+    <span>📖 ~${readMin} dəq</span>
+    <span>📝 ${totalWords.toLocaleString()} söz</span>
+    <span>${totalPages} səhifə</span>
   </div>
-  <div class="controls">
-    <button class="ctrl-btn" onclick="changeFontSize(1)">A+</button>
-    <button class="ctrl-btn" onclick="changeFontSize(-1)">A−</button>
-    <button class="ctrl-btn ghost" onclick="scrollToTop()">↑ Yuxarı</button>
-    <button class="ctrl-btn ghost" onclick="window.print()">🖨️ Çap</button>
+  <div class="top-ctrls">
+    <button class="cbtn" onclick="chFont(2)">A+</button>
+    <button class="cbtn" onclick="chFont(-2)">A−</button>
+    <button class="cbtn g" onclick="goTo(0)">⏮ Əvvəl</button>
+    <button class="cbtn g" onclick="goTo(TP-1)">⏭ Son</button>
+    <button class="cbtn g" onclick="openJump()">📄 Keç</button>
+    <button class="cbtn g" onclick="window.print()">🖨️</button>
   </div>
+  <div class="prog-wrap"><div class="prog-fill" id="pf"></div></div>
 </div>
-
 <div class="book-wrap">
-  <h1 class="chapter-title">${escHtml(title)}</h1>
-  ${author ? `<div class="chapter-author">${escHtml(author)}</div>` : ''}
-  <hr class="chapter-divider"/>
-  <div class="book-body" id="book-body">
-${formattedContent}
+  <div id="ch-hdr">
+    <h1 class="ch-title">${escH(title)}</h1>
+    ${author?`<p class="ch-author">${escH(author)}</p>`:''}
+    <hr class="ch-hr"/>
+  </div>
+  <div id="page-content"></div>
+</div>
+<div class="bot-nav">
+  <button class="nav-btn" id="bp" onclick="prev()" disabled>← Əvvəlki</button>
+  <div class="page-badge" id="pb" onclick="openJump()">1 / ${totalPages}<small>Səhifə</small></div>
+  <button class="nav-btn" id="bn" onclick="next()">Növbəti →</button>
+</div>
+<div class="hint">${useKb?'← → klaviatura · ':''}Sol/sağ sürüşdür</div>
+<div class="modal-overlay" id="jm" onclick="closeJump(event)">
+  <div class="modal-box">
+    <h3>Səhifəyə Keç (1–${totalPages})</h3>
+    <input type="number" id="ji" min="1" max="${totalPages}" placeholder="Nömrə..." onkeydown="if(event.key==='Enter')doJump()"/>
+    <br/><button class="mbtn" onclick="doJump()">Keç</button>
+    <button class="mbtn" style="background:transparent;color:${t.metaColor};border:1px solid ${t.hBorder};" onclick="closeJump()">Ləğv</button>
   </div>
 </div>
-
-<div class="book-footer">
-  Bu səhifə <strong>elmaddinabishov.github.io</strong> üçün yaradılmışdır · ${dateStr}
-</div>
-
 <script>
-// Progress bar
-window.addEventListener('scroll', () => {
-  const el = document.documentElement;
-  const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
-  document.getElementById('progress-bar').style.width = pct + '%';
-  // Save position
-  localStorage.setItem('readPos_${slugify(title)}', el.scrollTop);
-});
-// Restore position
-window.addEventListener('load', () => {
-  const saved = localStorage.getItem('readPos_${slugify(title)}');
-  if (saved) setTimeout(() => document.documentElement.scrollTop = parseInt(saved), 100);
-});
-
-// Font size
-let curSize = ${fontSize};
-function changeFontSize(d) {
-  curSize = Math.min(28, Math.max(14, curSize + d));
-  document.querySelectorAll('#book-body p').forEach(p => p.style.fontSize = curSize + 'px');
+const PAGES=${pagesJS};
+const TP=${totalPages};
+const SK='${skey}';
+let cp=0,fs=${fontSize};
+function goTo(n,sc){
+  n=Math.max(0,Math.min(TP-1,n));cp=n;localStorage.setItem(SK,n);
+  const el=document.getElementById('page-content');
+  el.style.animation='none';el.offsetHeight;el.style.animation='';
+  el.innerHTML=PAGES[n];
+  el.querySelectorAll('p').forEach(p=>p.style.fontSize=fs+'px');
+  document.getElementById('ch-hdr').style.display=n===0?'block':'none';
+  document.getElementById('bp').disabled=n===0;
+  document.getElementById('bn').disabled=n===TP-1;
+  document.getElementById('pb').innerHTML=(n+1)+' / '+TP+'<small>Səhifə</small>';
+  document.getElementById('pf').style.width=(TP>1?(n/(TP-1)*100):100)+'%';
+  if(sc!==false)window.scrollTo({top:0,behavior:'smooth'});
 }
-function scrollToTop() { window.scrollTo({top:0,behavior:'smooth'}); }
+function next(){if(cp<TP-1)goTo(cp+1);}
+function prev(){if(cp>0)goTo(cp-1);}
+function chFont(d){fs=Math.min(28,Math.max(13,fs+d));document.querySelectorAll('#page-content p').forEach(p=>p.style.fontSize=fs+'px');}
+function openJump(){document.getElementById('jm').classList.add('show');document.getElementById('ji').value='';setTimeout(()=>document.getElementById('ji').focus(),80);}
+function closeJump(e){if(!e||e.target===document.getElementById('jm'))document.getElementById('jm').classList.remove('show');}
+function doJump(){const v=parseInt(document.getElementById('ji').value);if(v>=1&&v<=TP){goTo(v-1);closeJump();}else alert('1–'+TP+' arasında daxil edin!');}
+${useKb?"document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight'||e.key==='ArrowDown')next();if(e.key==='ArrowLeft'||e.key==='ArrowUp')prev();});":""}
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60){d<0?next():prev();}},{passive:true});
+window.addEventListener('load',()=>{const s=parseInt(localStorage.getItem(SK))||0;goTo(Math.min(s,TP-1),false);});
 <\/script>
 </body>
 </html>`;
 }
 
 function generate() {
-  const title   = document.getElementById('title').value.trim() || 'Adssız Kitab';
-  const author  = document.getElementById('author').value.trim();
-  const content = document.getElementById('content').value;
-  const theme   = document.getElementById('theme').value;
-  const fontSize= document.getElementById('fontsize').value;
+  const title    = document.getElementById('title').value.trim() || 'Adsız Kitab';
+  const author   = document.getElementById('author').value.trim();
+  const content  = document.getElementById('content').value;
+  const theme    = document.getElementById('theme').value;
+  const fontSize = document.getElementById('fontsize').value;
+  const wpp      = parseInt(document.getElementById('wordsperpage').value);
+  const keyboard = document.getElementById('keyboard').value;
 
-  if (!content.trim()) {
-    alert('Zəhmət olmasa mətni daxil edin!');
-    return;
-  }
+  if (!content.trim()) { alert('Zəhmət olmasa mətni daxil edin!'); return; }
 
-  const html = buildHTML(title, author, content, theme, fontSize);
+  const html = buildHTML(title, author, content, theme, fontSize, wpp, keyboard);
 
-  // Download
   const blob = new Blob([html], {type:'text/html;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -572,12 +370,12 @@ function generate() {
   a.click();
   URL.revokeObjectURL(a.href);
 
-  // Preview
-  const frame = document.getElementById('preview-frame');
-  frame.srcdoc = html;
+  const paras = smartFormat(content);
+  const pages = paginate(paras, wpp);
+  document.getElementById('preview-info').textContent = a.download + ' · ' + pages.length + ' səhifə';
+  document.getElementById('preview-frame').srcdoc = html;
   const wrap = document.getElementById('preview-wrap');
   wrap.style.display = 'block';
-  document.getElementById('preview-info').textContent = a.download;
   wrap.scrollIntoView({behavior:'smooth', block:'start'});
 }
 </script>
