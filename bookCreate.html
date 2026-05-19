@@ -3,363 +3,459 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kitab Səhifəsi Yaradıcı</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Kitab Generator</title>
 <style>
-  :root {
-    --bg: #1a1a1a; --card: #242424; --border: #333;
-    --accent: #c9a96e; --text: #e8e0d5; --muted: #8a8070; --input-bg: #1e1e1e;
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg); color: var(--text);
-    font-family: 'Crimson Pro', Georgia, serif;
-    min-height: 100vh; display: flex; align-items: center;
-    justify-content: center; padding: 40px 20px;
+    font-family: Georgia, serif;
+    background: #1a1a1a;
+    color: #e0d8cc;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
   }
-  .container { width: 100%; max-width: 680px; }
-  .header { text-align: center; margin-bottom: 48px; }
-  .header h1 {
-    font-family: 'Playfair Display', serif; font-size: 2rem;
-    font-weight: 400; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 8px;
+  .container {
+    width: 100%;
+    max-width: 680px;
   }
-  .header p { color: var(--muted); font-size: 1rem; font-style: italic; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
-  .field { margin-bottom: 28px; }
-  label { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  input[type="text"] {
-    width: 100%; background: var(--input-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 14px 18px; color: var(--text);
-    font-family: 'Playfair Display', serif; font-size: 1.15rem; outline: none; transition: border-color 0.2s;
+  h1 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin-bottom: 2rem;
+    color: #c8b89a;
+    letter-spacing: 0.05em;
   }
-  input[type="text"]:focus { border-color: var(--accent); }
-  input[type="text"]::placeholder { color: #4a4a4a; font-style: italic; }
+  label {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+  input, textarea {
+    width: 100%;
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #e0d8cc;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 1.5rem;
+  }
+  input:focus, textarea:focus {
+    border-color: #c8b89a;
+  }
   textarea {
-    width: 100%; background: var(--input-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px 18px; color: var(--text);
-    font-family: 'Crimson Pro', Georgia, serif; font-size: 1.05rem; line-height: 1.75;
-    resize: vertical; min-height: 320px; outline: none; transition: border-color 0.2s;
+    resize: vertical;
+    min-height: 300px;
+    line-height: 1.7;
   }
-  textarea:focus { border-color: var(--accent); }
-  textarea::placeholder { color: #4a4a4a; font-style: italic; }
-  .hint { margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
-  .btn {
-    width: 100%; margin-top: 8px; padding: 16px; background: var(--accent);
-    color: #1a1310; border: none; border-radius: 8px;
-    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
-    letter-spacing: 0.06em; cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+  button {
+    width: 100%;
+    background: #c8b89a;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 6px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.9rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.1s;
   }
-  .btn:hover { opacity: 0.9; }
-  .btn:active { transform: scale(0.99); }
+  button:hover { background: #d9caaa; }
+  button:active { transform: scale(0.99); }
+  .note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="header">
-    <h1>Kitab Səhifəsi Yaradıcı</h1>
-    <p>Mətni yapışdır, oxunaqlı HTML kimi yüklə</p>
-  </div>
-  <div class="card">
-    <div class="field">
-      <label>Başlıq</label>
-      <input type="text" id="title" placeholder="Məsələn: Cinayət və Cəza — I Fəsil">
-    </div>
-    <div class="field">
-      <label>Məzmun</label>
-      <textarea id="content" placeholder="Kitab mətnini bura yapışdır...&#10;&#10;Hər paraqraf arasına bir Enter vur — qalan hər şeyi səhifə özü düzəldəcək."></textarea>
-      <p class="hint">💡 Paraqraflar arasına sadəcə bir boş sətir (Enter×2) qoy — avtomatik formatlayacaq.</p>
-    </div>
-    <button class="btn" onclick="download()">⬇ HTML kimi Yüklə</button>
-  </div>
+  <h1>📖 Kitab Oxucu — Generator</h1>
+
+  <label for="title">Kitab / Səhifə başlığı</label>
+  <input type="text" id="title" placeholder="məs. Dünyanın Sonuna Səyahət — I Fəsil">
+
+  <label for="content">Mətn məzmunu</label>
+  <textarea id="content" placeholder="Kitabdan kopyaladığın mətni bura yapışdır..."></textarea>
+
+  <button onclick="generate()">⬇ HTML kimi yüklə</button>
+
+  <p class="note">
+    Mətn avtomatik cümlələrə bölünəcək. Hər ekrana sığan qədər göstəriləcək,
+    artıq hissə növbəti səhifəyə keçəcək. Qaldığın yer yadda saxlanacaq.
+  </p>
 </div>
 
 <script>
-function processText(raw) {
-  const blocks = raw.split(/\n\s*\n/).map(b => b.replace(/\n/g,' ').replace(/\s+/g,' ').trim()).filter(b => b.length > 0);
-  if (blocks.length === 1 && raw.trim().length > 0) {
-    const sentences = raw.match(/[^.!?]+[.!?]+["']?\s*/g) || [raw];
-    const grouped = [];
-    for (let i = 0; i < sentences.length; i += 4) grouped.push(sentences.slice(i,i+4).join('').trim());
-    return grouped;
+function generate() {
+  const title = document.getElementById('title').value.trim();
+  const content = document.getElementById('content').value.trim();
+
+  if (!title) { alert('Başlıq daxil edin'); return; }
+  if (!content) { alert('Mətn daxil edin'); return; }
+
+  const cleanedContent = cleanText(content);
+  const html = buildReaderHTML(title, cleanedContent);
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const safeTitle = title.replace(/[^a-zA-Z0-9\u0400-\u04FF\u0100-\u024F\s]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+  a.download = (safeTitle || 'kitab') + '.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function cleanText(raw) {
+  // Normalize whitespace and line breaks
+  let text = raw
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/[ \t]+/g, ' ')      // multiple spaces → one
+    .replace(/\n{3,}/g, '\n\n')   // 3+ newlines → 2
+    .trim();
+
+  // Split into paragraphs by double newlines
+  const paragraphs = text.split(/\n\n+/).map(p => p.replace(/\n/g, ' ').trim()).filter(Boolean);
+
+  // For each paragraph, split into sentences intelligently
+  const result = [];
+  for (const para of paragraphs) {
+    const sentences = splitSentences(para);
+    // Group every 5 sentences into a paragraph for readability
+    for (let i = 0; i < sentences.length; i += 5) {
+      const chunk = sentences.slice(i, i + 5).join(' ');
+      result.push(chunk);
+    }
   }
-  return blocks;
+  return result; // array of paragraph strings
 }
 
-function escapeHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function splitSentences(text) {
+  // Split on sentence-ending punctuation followed by space+capital or end
+  const raw = text.match(/[^.!?…]+(?:[.!?…]+(?=\s+[A-ZА-ЯƏÜÖĞIİÇŞ]|$)|[.!?…]+$|$)/g) || [text];
+  return raw.map(s => s.trim()).filter(Boolean);
 }
 
-function slugify(str) {
-  return str.toLowerCase()
-    .replace(/ə/g,'e').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ü/g,'u')
-    .replace(/ğ/g,'g').replace(/ş/g,'s').replace(/ç/g,'c')
-    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-}
-
-function buildHTML(title, rawContent) {
-  const paragraphs = processText(rawContent);
-  const safeTitle = escapeHtml(title);
-  const storageKey = 'reader_page_' + slugify(title);
-  // Embed paragraphs as JSON inside the output HTML
-  const paraJSON = JSON.stringify(paragraphs);
+function buildReaderHTML(title, paragraphs) {
+  const paragraphsJSON = JSON.stringify(paragraphs);
+  const storageKey = 'reader_page_' + btoa(encodeURIComponent(title)).substring(0, 20);
 
   return `<!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${safeTitle}</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>${escapeHtml(title)}</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; background: #f5f0e8; color: #3a2e1e; font-family: 'Crimson Pro', Georgia, serif; }
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400;500&display=swap');
 
-  #reader {
-    display: flex; flex-direction: column; height: 100vh;
-    max-width: 700px; margin: 0 auto; padding: 0 32px;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F0E8;
+    --text: #2C2416;
+    --text-muted: #8a7a66;
+    --accent: #8B6914;
+    --border: #D4C9B0;
+    --page-bg: #FAF6EE;
   }
 
-  #topbar {
-    flex-shrink: 0; display: flex; align-items: center;
-    justify-content: space-between; padding: 16px 0 12px;
-    border-bottom: 1px solid #ddd5c4;
-  }
-  .book-title {
-    font-family: 'Playfair Display', serif; font-size: 0.83rem;
-    color: #8a7a60; font-style: italic; white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis; max-width: 72%;
-  }
-  .page-num { font-size: 0.76rem; color: #b0a090; letter-spacing: 0.05em; flex-shrink: 0; }
-
-  #text-area { flex: 1; overflow: hidden; position: relative; }
-
-  #page-content {
-    position: absolute; inset: 28px 0 20px; overflow: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  #page-content.fade-out { opacity: 0; transform: translateX(22px); }
-  #page-content.fade-out-prev { opacity: 0; transform: translateX(-22px); }
-
-  #page-content p {
-    font-size: clamp(1rem, 1.8vw, 1.16rem); line-height: 1.92;
-    margin-bottom: 1.3em; text-align: justify;
-    hyphens: auto; -webkit-hyphens: auto; color: #3a2e1e;
-  }
-  #page-content p.drop-cap::first-letter {
-    font-family: 'Playfair Display', serif; font-size: 3.3em; font-weight: 600;
-    float: left; line-height: 0.72; margin-right: 7px; margin-top: 5px; color: #8a6a30;
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
   }
 
-  #bottombar { flex-shrink: 0; padding: 10px 0 18px; border-top: 1px solid #ddd5c4; }
+  body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lora', 'EB Garamond', Georgia, serif;
+  }
 
-  #progress-wrap { height: 3px; background: #e0d8cc; border-radius: 2px; margin-bottom: 13px; overflow: hidden; }
-  #progress-fill { height: 100%; background: #c9a96e; border-radius: 2px; transition: width 0.35s ease; }
+  /* TOP BAR */
+  .topbar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--page-bg);
+  }
+  .topbar-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .page-indicator {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: 'Lora', serif;
+    white-space: nowrap;
+  }
 
-  #nav-row { display: flex; align-items: center; justify-content: space-between; }
+  /* READING AREA */
+  .reading-area {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* NAV ARROWS */
   .nav-btn {
-    display: flex; align-items: center; gap: 6px;
-    background: none; border: 1px solid #c9b89a; border-radius: 6px;
-    padding: 8px 16px; font-family: 'Crimson Pro', serif; font-size: 0.94rem;
-    color: #6a5a40; cursor: pointer; transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+    width: 56px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--border);
+    font-size: 1.4rem;
+    transition: color 0.2s;
+    user-select: none;
   }
-  .nav-btn:hover:not(:disabled) { background: #ede5d8; color: #2c2010; }
-  .nav-btn:disabled { opacity: 0.28; cursor: default; }
-  #percent-label { font-size: 0.78rem; color: #a08060; letter-spacing: 0.04em; }
-  #kbd-hint { text-align: center; font-size: 0.7rem; color: #c0b0a0; margin-top: 7px; letter-spacing: 0.03em; }
+  .nav-btn:hover { color: var(--accent); }
+  .nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+  /* PAGE CONTENT */
+  .page-content {
+    flex: 1;
+    overflow: hidden;
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .inner-content {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .para {
+    font-size: 1.13rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* BOTTOM BAR */
+  .bottombar {
+    flex-shrink: 0;
+    padding: 0.6rem 2rem 0.8rem;
+    background: var(--page-bg);
+    border-top: 1px solid var(--border);
+  }
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  /* Page turn animation */
+  .page-content.turning {
+    animation: pageTurn 0.18s ease;
+  }
+  @keyframes pageTurn {
+    0%   { opacity: 1; transform: translateX(0); }
+    50%  { opacity: 0; transform: translateX(-12px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
 </style>
 </head>
 <body>
-<div id="reader">
-  <div id="topbar">
-    <span class="book-title">${safeTitle}</span>
-    <span class="page-num" id="page-num-label">— / —</span>
+
+<div class="topbar">
+  <div class="topbar-title">${escapeHtml(title)}</div>
+  <div class="page-indicator" id="pageIndicator">— / —</div>
+</div>
+
+<div class="reading-area">
+  <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">&#8249;</button>
+  <div class="page-content" id="pageContent">
+    <div class="inner-content" id="innerContent"></div>
   </div>
-  <div id="text-area">
-    <div id="page-content"></div>
+  <button class="nav-btn" id="nextBtn" onclick="changePage(1)">&#8250;</button>
+</div>
+
+<div class="bottombar">
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
   </div>
-  <div id="bottombar">
-    <div id="progress-wrap"><div id="progress-fill" style="width:0%"></div></div>
-    <div id="nav-row">
-      <button class="nav-btn" id="btn-prev" onclick="changePage(-1)" disabled>&#8592; Əvvəlki</button>
-      <span id="percent-label">0%</span>
-      <button class="nav-btn" id="btn-next" onclick="changePage(1)">Növbəti &#8594;</button>
-    </div>
-    <div id="kbd-hint">← → düymələri ilə keçid edin</div>
-  </div>
+  <div class="progress-label" id="progressLabel">0%</div>
 </div>
 
 <script>
-const PARAGRAPHS = ${paraJSON};
+const PARAGRAPHS = ${paragraphsJSON};
 const STORAGE_KEY = '${storageKey}';
-let pages = [];
+
+let pages = [];         // array of paragraph-index arrays per page
 let currentPage = 0;
-let isAnimating = false;
 
-function measureParaHeight(text, containerWidth, isDropCap) {
-  const tester = document.createElement('p');
-  tester.style.cssText = [
-    'position:absolute','visibility:hidden','pointer-events:none',
-    'width:' + containerWidth + 'px',
-    'font-family:Crimson Pro,Georgia,serif',
-    'font-size:' + getReaderFontSize(),
-    'line-height:1.92',
-    'margin-bottom:0',
-    'text-align:justify',
-    'hyphens:auto',
-    '-webkit-hyphens:auto'
-  ].join(';');
-  tester.innerHTML = text;
-  if (isDropCap) tester.classList.add('drop-cap');
-  document.body.appendChild(tester);
-  const h = tester.offsetHeight;
-  document.body.removeChild(tester);
-  return h;
-}
-
-function getReaderFontSize() {
-  const vw = window.innerWidth;
-  const base = Math.min(Math.max(16, vw * 0.018), 18.56);
-  return base + 'px';
-}
-
+// ─── Build pages by measuring text height ───
 function buildPages() {
-  const content = document.getElementById('page-content');
-  const area = document.getElementById('text-area');
-  const availH = area.clientHeight - 48;
-  const cw = content.clientWidth;
-  const GAP = parseFloat(getReaderFontSize()) * 1.92 * 1.3;
+  const pageContent = document.getElementById('pageContent');
+  const inner = document.getElementById('innerContent');
+
+  // Available height for text
+  const availableH = pageContent.clientHeight;
+
+  // Temp container for measuring
+  const measurer = document.createElement('div');
+  measurer.className = 'inner-content';
+  measurer.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;top:0;left:0;width:' + inner.clientWidth + 'px;';
+  document.body.appendChild(measurer);
 
   pages = [];
-  let pageParas = [];
-  let usedH = 0;
+  let currentPageParas = [];
+  let currentH = 0;
+  const MARGIN_BOTTOM_PX = 22; // approx 1.4em at 1.13rem*16px
 
   for (let i = 0; i < PARAGRAPHS.length; i++) {
-    const isFirst = i === 0;
-    const ph = measureParaHeight(PARAGRAPHS[i], cw, isFirst && pageParas.length === 0 && pages.length === 0);
-    const needed = pageParas.length === 0 ? ph : ph + GAP;
-
-    if (pageParas.length > 0 && usedH + needed > availH) {
-      pages.push([...pageParas]);
-      pageParas = [i];
-      usedH = measureParaHeight(PARAGRAPHS[i], cw, false);
-    } else {
-      pageParas.push(i);
-      usedH += needed;
-    }
-  }
-  if (pageParas.length > 0) pages.push(pageParas);
-}
-
-function renderPage(dir) {
-  if (isAnimating) return;
-  isAnimating = true;
-  const content = document.getElementById('page-content');
-
-  if (dir !== 0) {
-    content.classList.add(dir > 0 ? 'fade-out' : 'fade-out-prev');
-    setTimeout(() => doRender(content, dir), 200);
-  } else {
-    doRender(content, 0);
-  }
-}
-
-function doRender(content, dir) {
-  content.classList.remove('fade-out','fade-out-prev');
-  content.style.opacity = '0';
-  content.style.transform = dir > 0 ? 'translateX(-22px)' : (dir < 0 ? 'translateX(22px)' : 'none');
-
-  content.innerHTML = '';
-  const page = pages[currentPage];
-  page.forEach((pIdx, i) => {
     const p = document.createElement('p');
-    p.innerHTML = PARAGRAPHS[pIdx];
-    if (currentPage === 0 && i === 0) p.classList.add('drop-cap');
-    content.appendChild(p);
-  });
+    p.className = 'para';
+    p.textContent = PARAGRAPHS[i];
+    measurer.appendChild(p);
+    const h = p.offsetHeight + MARGIN_BOTTOM_PX;
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      content.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-      content.style.opacity = '1';
-      content.style.transform = 'translateX(0)';
-      setTimeout(() => {
-        content.style.transition = '';
-        isAnimating = false;
-      }, 210);
-    });
-  });
+    if (currentPageParas.length > 0 && currentH + h > availableH) {
+      // This paragraph doesn't fit — start a new page
+      pages.push(currentPageParas);
+      currentPageParas = [i];
+      currentH = h;
+    } else {
+      currentPageParas.push(i);
+      currentH += h;
+    }
+    measurer.removeChild(p);
+  }
 
-  updateUI();
+  if (currentPageParas.length > 0) {
+    pages.push(currentPageParas);
+  }
+
+  document.body.removeChild(measurer);
+}
+
+// ─── Render current page ───
+function renderPage(animate) {
+  const inner = document.getElementById('innerContent');
+  const pageContent = document.getElementById('pageContent');
+
+  if (animate) {
+    pageContent.classList.remove('turning');
+    void pageContent.offsetWidth;
+    pageContent.classList.add('turning');
+  }
+
+  inner.innerHTML = '';
+  const paraIndices = pages[currentPage] || [];
+  for (const idx of paraIndices) {
+    const p = document.createElement('p');
+    p.className = 'para';
+    p.textContent = PARAGRAPHS[idx];
+    inner.appendChild(p);
+  }
+
+  const total = pages.length;
+  const current = currentPage + 1;
+  document.getElementById('pageIndicator').textContent = current + ' / ' + total;
+
+  const pct = total <= 1 ? 100 : Math.round((currentPage / (total - 1)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '%';
+
+  document.getElementById('prevBtn').disabled = currentPage === 0;
+  document.getElementById('nextBtn').disabled = currentPage >= total - 1;
+
+  // Save progress
   try { localStorage.setItem(STORAGE_KEY, currentPage); } catch(e) {}
 }
 
-function updateUI() {
-  const total = pages.length;
-  const pct = total > 1 ? Math.round((currentPage / (total - 1)) * 100) : 100;
-  document.getElementById('page-num-label').textContent = (currentPage + 1) + ' / ' + total;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('percent-label').textContent = pct + '%';
-  document.getElementById('btn-prev').disabled = currentPage === 0;
-  document.getElementById('btn-next').disabled = currentPage === total - 1;
-}
-
 function changePage(dir) {
-  if (isAnimating) return;
-  const next = currentPage + dir;
-  if (next < 0 || next >= pages.length) return;
-  currentPage = next;
-  renderPage(dir);
+  const newPage = currentPage + dir;
+  if (newPage < 0 || newPage >= pages.length) return;
+  currentPage = newPage;
+  renderPage(true);
+  window.scrollTo(0, 0);
 }
 
+// Keyboard navigation
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changePage(1);
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changePage(-1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changePage(-1);
 });
 
-let touchX = null;
-document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
-document.addEventListener('touchend', e => {
-  if (touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 50) changePage(dx < 0 ? 1 : -1);
-  touchX = null;
-});
-
+// ─── Init ───
 window.addEventListener('load', () => {
   buildPages();
+
+  // Restore saved page
   let saved = 0;
-  try { saved = parseInt(localStorage.getItem(STORAGE_KEY) || '0') || 0; } catch(e) {}
-  currentPage = (saved >= 0 && saved < pages.length) ? saved : 0;
-  renderPage(0);
+  try { saved = parseInt(localStorage.getItem(STORAGE_KEY)) || 0; } catch(e) {}
+  currentPage = Math.min(saved, Math.max(0, pages.length - 1));
+
+  renderPage(false);
 });
 
+// Rebuild on resize
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    const old = currentPage;
+    const savedPage = currentPage;
     buildPages();
-    currentPage = Math.min(old, pages.length - 1);
-    renderPage(0);
-  }, 200);
+    // Try to stay near same paragraph
+    currentPage = Math.min(savedPage, Math.max(0, pages.length - 1));
+    renderPage(false);
+  }, 300);
 });
 <\/script>
 </body>
 </html>`;
 }
 
-function download() {
-  const title = document.getElementById('title').value.trim();
-  const content = document.getElementById('content').value.trim();
-  if (!title || !content) { alert('Zəhmət olmasa başlıq və məzmunu doldurun.'); return; }
-  const html = buildHTML(title, content);
-  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = (slugify(title) || 'kitab') + '.html';
-  a.click();
-  URL.revokeObjectURL(url);
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
