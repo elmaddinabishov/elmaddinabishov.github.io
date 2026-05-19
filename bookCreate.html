@@ -1,382 +1,365 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kitab Səhifəsi Generatoru</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitab Səhifəsi Yaradıcı</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#1a1a2e;--panel:#16213e;--accent:#e94560;--gold:#f5a623;
-  --text:#e8e8f0;--sub:#8888aa;--border:#2a2a4a;--input-bg:#0d1b2a;--radius:16px;
-}
-body{
-  background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;
-  padding:40px 16px 60px;
-  background-image:radial-gradient(ellipse at 20% 20%,rgba(233,69,96,.08) 0%,transparent 60%),
-                   radial-gradient(ellipse at 80% 80%,rgba(245,166,35,.06) 0%,transparent 60%);
-}
-header{text-align:center;margin-bottom:40px;}
-header .icon{font-size:3rem;display:block;margin-bottom:8px;animation:float 3s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-header h1{
-  font-family:'Lora',serif;font-size:2.2rem;font-weight:600;
-  background:linear-gradient(135deg,var(--gold),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:-.5px;
-}
-header p{color:var(--sub);font-size:.9rem;margin-top:6px;}
-.card{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
-  padding:32px;width:100%;max-width:680px;box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-.field{margin-bottom:24px;}
-.field label{
-  display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:1.5px;color:var(--gold);margin-bottom:8px;
-}
-.field input,.field textarea,.field select{
-  width:100%;background:var(--input-bg);border:1.5px solid var(--border);
-  border-radius:10px;color:var(--text);font-family:'Nunito',sans-serif;
-  font-size:.95rem;padding:12px 16px;outline:none;
-  transition:border-color .2s,box-shadow .2s;resize:none;
-}
-.field input:focus,.field textarea:focus,.field select:focus{
-  border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,.12);
-}
-.field textarea{min-height:260px;line-height:1.7;}
-.options-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.tip{
-  background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);
-  border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--sub);
-  line-height:1.6;margin-bottom:24px;
-}
-.tip strong{color:var(--gold);}
-.btn{
-  width:100%;background:linear-gradient(135deg,var(--accent),#c0392b);
-  border:none;border-radius:12px;color:#fff;font-family:'Nunito',sans-serif;
-  font-size:1rem;font-weight:700;padding:16px;cursor:pointer;
-  letter-spacing:.5px;transition:transform .15s,box-shadow .2s;
-  box-shadow:0 6px 24px rgba(233,69,96,.35);
-  display:flex;align-items:center;justify-content:center;gap:10px;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(233,69,96,.45);}
-.btn:active{transform:translateY(0);}
-.counter{text-align:right;font-size:.75rem;color:var(--sub);margin-top:4px;}
-.preview-wrap{margin-top:32px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);display:none;}
-.preview-label{background:#0f3460;padding:10px 16px;font-size:.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--sub);font-weight:700;display:flex;align-items:center;justify-content:space-between;}
-.preview-label span{color:var(--gold);}
-#preview-frame{width:100%;height:520px;border:none;background:#fff;}
-footer{margin-top:48px;text-align:center;color:var(--sub);font-size:.8rem;line-height:1.8;}
+  :root {
+    --bg: #1a1a1a; --card: #242424; --border: #333;
+    --accent: #c9a96e; --text: #e8e0d5; --muted: #8a8070; --input-bg: #1e1e1e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; padding: 40px 20px;
+  }
+  .container { width: 100%; max-width: 680px; }
+  .header { text-align: center; margin-bottom: 48px; }
+  .header h1 {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    font-weight: 400; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 8px;
+  }
+  .header p { color: var(--muted); font-size: 1rem; font-style: italic; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
+  .field { margin-bottom: 28px; }
+  label { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  input[type="text"] {
+    width: 100%; background: var(--input-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 18px; color: var(--text);
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; outline: none; transition: border-color 0.2s;
+  }
+  input[type="text"]:focus { border-color: var(--accent); }
+  input[type="text"]::placeholder { color: #4a4a4a; font-style: italic; }
+  textarea {
+    width: 100%; background: var(--input-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 18px; color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif; font-size: 1.05rem; line-height: 1.75;
+    resize: vertical; min-height: 320px; outline: none; transition: border-color 0.2s;
+  }
+  textarea:focus { border-color: var(--accent); }
+  textarea::placeholder { color: #4a4a4a; font-style: italic; }
+  .hint { margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  .btn {
+    width: 100%; margin-top: 8px; padding: 16px; background: var(--accent);
+    color: #1a1310; border: none; border-radius: 8px;
+    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn:active { transform: scale(0.99); }
 </style>
 </head>
 <body>
-
-<header>
-  <span class="icon">📖</span>
-  <h1>Kitab Səhifəsi Generatoru</h1>
-  <p>Mətni yapışdır → Next/Prev ilə səhifə-səhifə oxu → GitHub-a yüklə</p>
-</header>
-
-<div class="card">
-
-  <div class="field">
-    <label>📌 Kitab / Fəsil Başlığı</label>
-    <input type="text" id="title" placeholder="məs. Dəmir Adam — Fəsil 3"/>
+<div class="container">
+  <div class="header">
+    <h1>Kitab Səhifəsi Yaradıcı</h1>
+    <p>Mətni yapışdır, oxunaqlı HTML kimi yüklə</p>
   </div>
-
-  <div class="field">
-    <label>✍️ Müəllif (isteğe bağlı)</label>
-    <input type="text" id="author" placeholder="məs. Napoleon Hill"/>
-  </div>
-
-  <div class="field">
-    <label>📄 Mətn — Kopyala yapışdır, heç nə düzəltmə</label>
-    <textarea id="content" placeholder="Bütün mətni buraya yapışdır. Sistem özü:&#10;• Cümlələri qruplaşdırır&#10;• Abzaslara bölür&#10;• Avtomatik səhifə-səhifə paylanır&#10;• Oxuma yerini yadda saxlayır (localStorage)"></textarea>
-    <div class="counter"><span id="char-count">0</span> simvol · <span id="word-count">0</span> söz · ~<span id="page-est">0</span> səhifə</div>
-  </div>
-
-  <div class="options-row">
+  <div class="card">
     <div class="field">
-      <label>🎨 Oxuma Temi</label>
-      <select id="theme">
-        <option value="bookmate">Bookmate (Krem)</option>
-        <option value="night">Gecə (Tünd)</option>
-        <option value="sepia">Sepia (Sarımtıl)</option>
-        <option value="white">Ağ (Klassik)</option>
-        <option value="dark-blue">Tünd Mavi</option>
-      </select>
+      <label>Başlıq</label>
+      <input type="text" id="title" placeholder="Məsələn: Cinayət və Cəza — I Fəsil">
     </div>
     <div class="field">
-      <label>🔤 Şrift Ölçüsü</label>
-      <select id="fontsize">
-        <option value="17">Kiçik (17px)</option>
-        <option value="19" selected>Normal (19px)</option>
-        <option value="21">Böyük (21px)</option>
-        <option value="24">Çox Böyük (24px)</option>
-      </select>
+      <label>Məzmun</label>
+      <textarea id="content" placeholder="Kitab mətnini bura yapışdır...&#10;&#10;Hər paraqraf arasına bir Enter vur — qalan hər şeyi səhifə özü düzəldəcək."></textarea>
+      <p class="hint">💡 Paraqraflar arasına sadəcə bir boş sətir (Enter×2) qoy — avtomatik formatlayacaq.</p>
     </div>
+    <button class="btn" onclick="download()">⬇ HTML kimi Yüklə</button>
   </div>
-
-  <div class="options-row">
-    <div class="field">
-      <label>📃 Hər Səhifədə Söz Sayı</label>
-      <select id="wordsperpage">
-        <option value="200">Az (200 söz)</option>
-        <option value="300" selected>Normal (300 söz)</option>
-        <option value="450">Çox (450 söz)</option>
-        <option value="600">Maksimum (600 söz)</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>⌨️ Klaviatura ← → oxları</label>
-      <select id="keyboard">
-        <option value="yes" selected>Bəli (aktiv)</option>
-        <option value="no">Xeyr</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="tip">
-    <strong>📖 Necə işləyir?</strong><br/>
-    Mətni yapışdır → cümlələrə, abzaslara bölünür → seçdiyin söz sayına görə <strong>avtomatik səhifələnir</strong>. Oxuma yerin yadda saxlanır — sabah açsan qaldığın səhifədən davam edərsən. <strong>← →</strong> klaviatura oxları + <strong>sağ/sol sürüşdürmə</strong> ilə keçid.
-  </div>
-
-  <button class="btn" onclick="generate()">
-    <span>⬇️</span> HTML Olaraq Yüklə
-  </button>
-
-  <div class="preview-wrap" id="preview-wrap">
-    <div class="preview-label">Önizləmə <span id="preview-info">—</span></div>
-    <iframe id="preview-frame" title="Önizləmə"></iframe>
-  </div>
-
 </div>
 
-<footer>
-  GitHub: <strong>elmaddinabishov.github.io</strong> → faylı əlavə et<br/>
-  Hər kitab ayrı HTML — Next/Prev, klaviatura, swipe, oxuma yeri yadda saxlanır
-</footer>
-
 <script>
-const THEMES = {
-  bookmate:{pageBg:'#f4f1ea',textColor:'#2c2c2c',ff:"'Lora',Georgia,serif",bodyBg:'#e8e4d9',hBg:'#f4f1ea',hBorder:'#d4cfc4',titleColor:'#1a1a1a',metaColor:'#888',pFill:'#8b7355',btnBg:'#8b7355',btnColor:'#fff',navBg:'#f4f1ea',navBorder:'#d4cfc4',pageBadgeBg:'#e8e4d9',pageBadgeColor:'#5c4a32'},
-  night:{pageBg:'#1a1a1a',textColor:'#c8c8c8',ff:"'Lora',Georgia,serif",bodyBg:'#111',hBg:'#1a1a1a',hBorder:'#333',titleColor:'#e0e0e0',metaColor:'#666',pFill:'#e94560',btnBg:'#e94560',btnColor:'#fff',navBg:'#1a1a1a',navBorder:'#333',pageBadgeBg:'#222',pageBadgeColor:'#e94560'},
-  sepia:{pageBg:'#fbf0d9',textColor:'#3b2f1e',ff:"'Lora',Georgia,serif",bodyBg:'#f0e4c8',hBg:'#fbf0d9',hBorder:'#d9c8a0',titleColor:'#2a1f10',metaColor:'#9a7b50',pFill:'#a0784a',btnBg:'#a0784a',btnColor:'#fff',navBg:'#fbf0d9',navBorder:'#d9c8a0',pageBadgeBg:'#f0e4c8',pageBadgeColor:'#6b4c28'},
-  white:{pageBg:'#ffffff',textColor:'#1a1a1a',ff:"'Lora',Georgia,serif",bodyBg:'#f0f0f0',hBg:'#fff',hBorder:'#e0e0e0',titleColor:'#000',metaColor:'#999',pFill:'#333',btnBg:'#222',btnColor:'#fff',navBg:'#fff',navBorder:'#e0e0e0',pageBadgeBg:'#f0f0f0',pageBadgeColor:'#333'},
-  'dark-blue':{pageBg:'#0d1b2a',textColor:'#c8d8e8',ff:"'Lora',Georgia,serif",bodyBg:'#081420',hBg:'#0d1b2a',hBorder:'#1e3a5f',titleColor:'#e8f4ff',metaColor:'#5588aa',pFill:'#4a9eff',btnBg:'#4a9eff',btnColor:'#fff',navBg:'#0d1b2a',navBorder:'#1e3a5f',pageBadgeBg:'#0a1828',pageBadgeColor:'#4a9eff'}
-};
-
-const ta = document.getElementById('content');
-const wppSel = document.getElementById('wordsperpage');
-
-function updateCounter() {
-  const v = ta.value;
-  const wc = v.trim() ? v.trim().split(/\s+/).length : 0;
-  const wpp = parseInt(wppSel.value) || 300;
-  document.getElementById('char-count').textContent = v.length.toLocaleString();
-  document.getElementById('word-count').textContent = wc.toLocaleString();
-  document.getElementById('page-est').textContent = wc ? Math.ceil(wc / wpp) : 0;
-}
-ta.addEventListener('input', updateCounter);
-wppSel.addEventListener('change', updateCounter);
-
-function escH(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').slice(0,60)||'kitab'; }
-
-function smartFormat(raw) {
-  if (!raw.trim()) return [];
-  let text = raw.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
-  const hasParas = /\n\s*\n/.test(text);
-  let paras = [];
-  if (hasParas) {
-    paras = text.split(/\n\s*\n/).map(p=>p.replace(/\n/g,' ').replace(/\s+/g,' ').trim()).filter(Boolean);
-  } else {
-    text = text.replace(/\n/g,' ').replace(/\s+/g,' ').trim();
-    const rx = /[^.!?…]+(?:[.!?…]+(?:\s|$))+/g;
-    const sents=[]; let m;
-    while((m=rx.exec(text))!==null){ const s=m[0].trim(); if(s) sents.push(s); }
-    if (sents.length < 2) {
-      const w = text.split(/\s+/);
-      for(let i=0;i<w.length;i+=60) paras.push(w.slice(i,i+60).join(' '));
-    } else {
-      for(let i=0;i<sents.length;i+=4) paras.push(sents.slice(i,i+4).join(' '));
-    }
+function processText(raw) {
+  const blocks = raw.split(/\n\s*\n/).map(b => b.replace(/\n/g,' ').replace(/\s+/g,' ').trim()).filter(b => b.length > 0);
+  if (blocks.length === 1 && raw.trim().length > 0) {
+    const sentences = raw.match(/[^.!?]+[.!?]+["']?\s*/g) || [raw];
+    const grouped = [];
+    for (let i = 0; i < sentences.length; i += 4) grouped.push(sentences.slice(i,i+4).join('').trim());
+    return grouped;
   }
-  return paras.filter(Boolean);
+  return blocks;
 }
 
-function paginate(paras, wpp) {
-  const pages=[]; let cur=[],wc=0;
-  for (const p of paras) {
-    const pw=p.split(/\s+/).length;
-    if (wc+pw>wpp && cur.length>0){ pages.push(cur); cur=[]; wc=0; }
-    cur.push(p); wc+=pw;
-  }
-  if (cur.length) pages.push(cur);
-  return pages;
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function buildHTML(title, author, rawContent, theme, fontSize, wpp, keyboard) {
-  const t = THEMES[theme] || THEMES.bookmate;
-  const paras = smartFormat(rawContent);
-  const pages = paginate(paras, wpp);
-  const totalPages = pages.length;
-  const totalWords = rawContent.trim() ? rawContent.trim().split(/\s+/).length : 0;
-  const readMin = Math.ceil(totalWords / 200);
-  const dateStr = new Date().toLocaleDateString('az-AZ',{year:'numeric',month:'long',day:'numeric'});
-  const skey = `rp_${slugify(title)}`;
-  const useKb = keyboard === 'yes';
-  const pagesJS = JSON.stringify(pages.map(pg=>pg.map(p=>`<p>${escH(p)}</p>`).join('\n')));
+function slugify(str) {
+  return str.toLowerCase()
+    .replace(/ə/g,'e').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ü/g,'u')
+    .replace(/ğ/g,'g').replace(/ş/g,'s').replace(/ç/g,'c')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+function buildHTML(title, rawContent) {
+  const paragraphs = processText(rawContent);
+  const safeTitle = escapeHtml(title);
+  const storageKey = 'reader_page_' + slugify(title);
+  // Embed paragraphs as JSON inside the output HTML
+  const paraJSON = JSON.stringify(paragraphs);
 
   return `<!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>${escH(title)}</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${safeTitle}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;}
-body{background:${t.bodyBg};color:${t.textColor};font-family:${t.ff};display:flex;flex-direction:column;min-height:100vh;}
-.top-bar{background:${t.hBg};border-bottom:1px solid ${t.hBorder};padding:14px 20px 10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.07);}
-.book-title-sm{font-size:1rem;font-weight:600;color:${t.titleColor};margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.book-meta{font-size:.75rem;color:${t.metaColor};font-family:sans-serif;display:flex;gap:12px;flex-wrap:wrap;}
-.top-ctrls{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.cbtn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:20px;font-family:sans-serif;font-size:.76rem;font-weight:600;padding:5px 13px;cursor:pointer;transition:opacity .15s;}
-.cbtn:active{opacity:.75;}
-.cbtn.g{background:transparent;border:1px solid ${t.hBorder};color:${t.metaColor};}
-.prog-wrap{margin-top:8px;height:3px;background:${t.hBorder};border-radius:2px;overflow:hidden;}
-.prog-fill{height:100%;background:${t.pFill};border-radius:2px;transition:width .35s ease;}
-.book-wrap{max-width:680px;margin:0 auto;padding:40px 22px 32px;flex:1;width:100%;}
-.ch-title{font-size:1.85rem;font-weight:600;color:${t.titleColor};line-height:1.3;margin-bottom:6px;letter-spacing:-.4px;}
-.ch-author{font-size:.92rem;color:${t.metaColor};font-family:sans-serif;font-style:italic;margin-bottom:32px;}
-.ch-hr{border:none;border-top:1px solid ${t.hBorder};margin:0 0 36px;opacity:.4;}
-#page-content{animation:fadeIn .22s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-#page-content p{font-size:${fontSize}px;line-height:1.95;margin-bottom:1.65em;text-align:justify;-webkit-hyphens:auto;hyphens:auto;color:${t.textColor};}
-#page-content p:first-child::first-letter{font-size:3.4em;font-weight:600;float:left;line-height:.75;margin:4px 10px 0 0;color:${t.pFill};}
-.bot-nav{background:${t.navBg};border-top:1px solid ${t.navBorder};padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;bottom:0;box-shadow:0 -2px 12px rgba(0,0,0,.07);}
-.nav-btn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:12px;font-family:sans-serif;font-size:.88rem;font-weight:700;padding:12px 22px;cursor:pointer;transition:transform .15s,opacity .15s;min-width:88px;box-shadow:0 3px 12px rgba(0,0,0,.15);}
-.nav-btn:hover{transform:translateY(-1px);}
-.nav-btn:active{transform:scale(.96);}
-.nav-btn:disabled{opacity:.28;cursor:default;transform:none;}
-.page-badge{background:${t.pageBadgeBg};color:${t.pageBadgeColor};border:1px solid ${t.navBorder};border-radius:20px;font-family:sans-serif;font-size:.84rem;font-weight:700;padding:8px 16px;text-align:center;white-space:nowrap;min-width:100px;cursor:pointer;}
-.page-badge small{font-size:.68rem;opacity:.65;display:block;}
-.hint{text-align:center;font-family:sans-serif;font-size:.7rem;color:${t.metaColor};padding:6px;opacity:.5;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;}
-.modal-overlay.show{display:flex;}
-.modal-box{background:${t.hBg};border:1px solid ${t.hBorder};border-radius:16px;padding:24px;width:260px;text-align:center;}
-.modal-box h3{color:${t.titleColor};font-family:sans-serif;font-size:1rem;margin-bottom:16px;}
-.modal-box input{width:100%;background:${t.bodyBg};border:1px solid ${t.hBorder};border-radius:8px;color:${t.textColor};font-family:sans-serif;font-size:1rem;padding:10px;text-align:center;outline:none;margin-bottom:12px;}
-.modal-box .mbtn{background:${t.btnBg};color:${t.btnColor};border:none;border-radius:8px;font-family:sans-serif;font-size:.9rem;font-weight:700;padding:10px 20px;cursor:pointer;margin:4px;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: #f5f0e8; color: #3a2e1e; font-family: 'Crimson Pro', Georgia, serif; }
+
+  #reader {
+    display: flex; flex-direction: column; height: 100vh;
+    max-width: 700px; margin: 0 auto; padding: 0 32px;
+  }
+
+  #topbar {
+    flex-shrink: 0; display: flex; align-items: center;
+    justify-content: space-between; padding: 16px 0 12px;
+    border-bottom: 1px solid #ddd5c4;
+  }
+  .book-title {
+    font-family: 'Playfair Display', serif; font-size: 0.83rem;
+    color: #8a7a60; font-style: italic; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; max-width: 72%;
+  }
+  .page-num { font-size: 0.76rem; color: #b0a090; letter-spacing: 0.05em; flex-shrink: 0; }
+
+  #text-area { flex: 1; overflow: hidden; position: relative; }
+
+  #page-content {
+    position: absolute; inset: 28px 0 20px; overflow: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  #page-content.fade-out { opacity: 0; transform: translateX(22px); }
+  #page-content.fade-out-prev { opacity: 0; transform: translateX(-22px); }
+
+  #page-content p {
+    font-size: clamp(1rem, 1.8vw, 1.16rem); line-height: 1.92;
+    margin-bottom: 1.3em; text-align: justify;
+    hyphens: auto; -webkit-hyphens: auto; color: #3a2e1e;
+  }
+  #page-content p.drop-cap::first-letter {
+    font-family: 'Playfair Display', serif; font-size: 3.3em; font-weight: 600;
+    float: left; line-height: 0.72; margin-right: 7px; margin-top: 5px; color: #8a6a30;
+  }
+
+  #bottombar { flex-shrink: 0; padding: 10px 0 18px; border-top: 1px solid #ddd5c4; }
+
+  #progress-wrap { height: 3px; background: #e0d8cc; border-radius: 2px; margin-bottom: 13px; overflow: hidden; }
+  #progress-fill { height: 100%; background: #c9a96e; border-radius: 2px; transition: width 0.35s ease; }
+
+  #nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .nav-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid #c9b89a; border-radius: 6px;
+    padding: 8px 16px; font-family: 'Crimson Pro', serif; font-size: 0.94rem;
+    color: #6a5a40; cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .nav-btn:hover:not(:disabled) { background: #ede5d8; color: #2c2010; }
+  .nav-btn:disabled { opacity: 0.28; cursor: default; }
+  #percent-label { font-size: 0.78rem; color: #a08060; letter-spacing: 0.04em; }
+  #kbd-hint { text-align: center; font-size: 0.7rem; color: #c0b0a0; margin-top: 7px; letter-spacing: 0.03em; }
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <div class="book-title-sm">${escH(title)}</div>
-  <div class="book-meta">
-    ${author?`<span>✍️ ${escH(author)}</span>`:''}
-    <span>📖 ~${readMin} dəq</span>
-    <span>📝 ${totalWords.toLocaleString()} söz</span>
-    <span>${totalPages} səhifə</span>
+<div id="reader">
+  <div id="topbar">
+    <span class="book-title">${safeTitle}</span>
+    <span class="page-num" id="page-num-label">— / —</span>
   </div>
-  <div class="top-ctrls">
-    <button class="cbtn" onclick="chFont(2)">A+</button>
-    <button class="cbtn" onclick="chFont(-2)">A−</button>
-    <button class="cbtn g" onclick="goTo(0)">⏮ Əvvəl</button>
-    <button class="cbtn g" onclick="goTo(TP-1)">⏭ Son</button>
-    <button class="cbtn g" onclick="openJump()">📄 Keç</button>
-    <button class="cbtn g" onclick="window.print()">🖨️</button>
+  <div id="text-area">
+    <div id="page-content"></div>
   </div>
-  <div class="prog-wrap"><div class="prog-fill" id="pf"></div></div>
-</div>
-<div class="book-wrap">
-  <div id="ch-hdr">
-    <h1 class="ch-title">${escH(title)}</h1>
-    ${author?`<p class="ch-author">${escH(author)}</p>`:''}
-    <hr class="ch-hr"/>
-  </div>
-  <div id="page-content"></div>
-</div>
-<div class="bot-nav">
-  <button class="nav-btn" id="bp" onclick="prev()" disabled>← Əvvəlki</button>
-  <div class="page-badge" id="pb" onclick="openJump()">1 / ${totalPages}<small>Səhifə</small></div>
-  <button class="nav-btn" id="bn" onclick="next()">Növbəti →</button>
-</div>
-<div class="hint">${useKb?'← → klaviatura · ':''}Sol/sağ sürüşdür</div>
-<div class="modal-overlay" id="jm" onclick="closeJump(event)">
-  <div class="modal-box">
-    <h3>Səhifəyə Keç (1–${totalPages})</h3>
-    <input type="number" id="ji" min="1" max="${totalPages}" placeholder="Nömrə..." onkeydown="if(event.key==='Enter')doJump()"/>
-    <br/><button class="mbtn" onclick="doJump()">Keç</button>
-    <button class="mbtn" style="background:transparent;color:${t.metaColor};border:1px solid ${t.hBorder};" onclick="closeJump()">Ləğv</button>
+  <div id="bottombar">
+    <div id="progress-wrap"><div id="progress-fill" style="width:0%"></div></div>
+    <div id="nav-row">
+      <button class="nav-btn" id="btn-prev" onclick="changePage(-1)" disabled>&#8592; Əvvəlki</button>
+      <span id="percent-label">0%</span>
+      <button class="nav-btn" id="btn-next" onclick="changePage(1)">Növbəti &#8594;</button>
+    </div>
+    <div id="kbd-hint">← → düymələri ilə keçid edin</div>
   </div>
 </div>
+
 <script>
-const PAGES=${pagesJS};
-const TP=${totalPages};
-const SK='${skey}';
-let cp=0,fs=${fontSize};
-function goTo(n,sc){
-  n=Math.max(0,Math.min(TP-1,n));cp=n;localStorage.setItem(SK,n);
-  const el=document.getElementById('page-content');
-  el.style.animation='none';el.offsetHeight;el.style.animation='';
-  el.innerHTML=PAGES[n];
-  el.querySelectorAll('p').forEach(p=>p.style.fontSize=fs+'px');
-  document.getElementById('ch-hdr').style.display=n===0?'block':'none';
-  document.getElementById('bp').disabled=n===0;
-  document.getElementById('bn').disabled=n===TP-1;
-  document.getElementById('pb').innerHTML=(n+1)+' / '+TP+'<small>Səhifə</small>';
-  document.getElementById('pf').style.width=(TP>1?(n/(TP-1)*100):100)+'%';
-  if(sc!==false)window.scrollTo({top:0,behavior:'smooth'});
+const PARAGRAPHS = ${paraJSON};
+const STORAGE_KEY = '${storageKey}';
+let pages = [];
+let currentPage = 0;
+let isAnimating = false;
+
+function measureParaHeight(text, containerWidth, isDropCap) {
+  const tester = document.createElement('p');
+  tester.style.cssText = [
+    'position:absolute','visibility:hidden','pointer-events:none',
+    'width:' + containerWidth + 'px',
+    'font-family:Crimson Pro,Georgia,serif',
+    'font-size:' + getReaderFontSize(),
+    'line-height:1.92',
+    'margin-bottom:0',
+    'text-align:justify',
+    'hyphens:auto',
+    '-webkit-hyphens:auto'
+  ].join(';');
+  tester.innerHTML = text;
+  if (isDropCap) tester.classList.add('drop-cap');
+  document.body.appendChild(tester);
+  const h = tester.offsetHeight;
+  document.body.removeChild(tester);
+  return h;
 }
-function next(){if(cp<TP-1)goTo(cp+1);}
-function prev(){if(cp>0)goTo(cp-1);}
-function chFont(d){fs=Math.min(28,Math.max(13,fs+d));document.querySelectorAll('#page-content p').forEach(p=>p.style.fontSize=fs+'px');}
-function openJump(){document.getElementById('jm').classList.add('show');document.getElementById('ji').value='';setTimeout(()=>document.getElementById('ji').focus(),80);}
-function closeJump(e){if(!e||e.target===document.getElementById('jm'))document.getElementById('jm').classList.remove('show');}
-function doJump(){const v=parseInt(document.getElementById('ji').value);if(v>=1&&v<=TP){goTo(v-1);closeJump();}else alert('1–'+TP+' arasında daxil edin!');}
-${useKb?"document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight'||e.key==='ArrowDown')next();if(e.key==='ArrowLeft'||e.key==='ArrowUp')prev();});":""}
-let tx=0;
-document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60){d<0?next():prev();}},{passive:true});
-window.addEventListener('load',()=>{const s=parseInt(localStorage.getItem(SK))||0;goTo(Math.min(s,TP-1),false);});
+
+function getReaderFontSize() {
+  const vw = window.innerWidth;
+  const base = Math.min(Math.max(16, vw * 0.018), 18.56);
+  return base + 'px';
+}
+
+function buildPages() {
+  const content = document.getElementById('page-content');
+  const area = document.getElementById('text-area');
+  const availH = area.clientHeight - 48;
+  const cw = content.clientWidth;
+  const GAP = parseFloat(getReaderFontSize()) * 1.92 * 1.3;
+
+  pages = [];
+  let pageParas = [];
+  let usedH = 0;
+
+  for (let i = 0; i < PARAGRAPHS.length; i++) {
+    const isFirst = i === 0;
+    const ph = measureParaHeight(PARAGRAPHS[i], cw, isFirst && pageParas.length === 0 && pages.length === 0);
+    const needed = pageParas.length === 0 ? ph : ph + GAP;
+
+    if (pageParas.length > 0 && usedH + needed > availH) {
+      pages.push([...pageParas]);
+      pageParas = [i];
+      usedH = measureParaHeight(PARAGRAPHS[i], cw, false);
+    } else {
+      pageParas.push(i);
+      usedH += needed;
+    }
+  }
+  if (pageParas.length > 0) pages.push(pageParas);
+}
+
+function renderPage(dir) {
+  if (isAnimating) return;
+  isAnimating = true;
+  const content = document.getElementById('page-content');
+
+  if (dir !== 0) {
+    content.classList.add(dir > 0 ? 'fade-out' : 'fade-out-prev');
+    setTimeout(() => doRender(content, dir), 200);
+  } else {
+    doRender(content, 0);
+  }
+}
+
+function doRender(content, dir) {
+  content.classList.remove('fade-out','fade-out-prev');
+  content.style.opacity = '0';
+  content.style.transform = dir > 0 ? 'translateX(-22px)' : (dir < 0 ? 'translateX(22px)' : 'none');
+
+  content.innerHTML = '';
+  const page = pages[currentPage];
+  page.forEach((pIdx, i) => {
+    const p = document.createElement('p');
+    p.innerHTML = PARAGRAPHS[pIdx];
+    if (currentPage === 0 && i === 0) p.classList.add('drop-cap');
+    content.appendChild(p);
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      content.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      content.style.opacity = '1';
+      content.style.transform = 'translateX(0)';
+      setTimeout(() => {
+        content.style.transition = '';
+        isAnimating = false;
+      }, 210);
+    });
+  });
+
+  updateUI();
+  try { localStorage.setItem(STORAGE_KEY, currentPage); } catch(e) {}
+}
+
+function updateUI() {
+  const total = pages.length;
+  const pct = total > 1 ? Math.round((currentPage / (total - 1)) * 100) : 100;
+  document.getElementById('page-num-label').textContent = (currentPage + 1) + ' / ' + total;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('percent-label').textContent = pct + '%';
+  document.getElementById('btn-prev').disabled = currentPage === 0;
+  document.getElementById('btn-next').disabled = currentPage === total - 1;
+}
+
+function changePage(dir) {
+  if (isAnimating) return;
+  const next = currentPage + dir;
+  if (next < 0 || next >= pages.length) return;
+  currentPage = next;
+  renderPage(dir);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changePage(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changePage(-1);
+});
+
+let touchX = null;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) changePage(dx < 0 ? 1 : -1);
+  touchX = null;
+});
+
+window.addEventListener('load', () => {
+  buildPages();
+  let saved = 0;
+  try { saved = parseInt(localStorage.getItem(STORAGE_KEY) || '0') || 0; } catch(e) {}
+  currentPage = (saved >= 0 && saved < pages.length) ? saved : 0;
+  renderPage(0);
+});
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const old = currentPage;
+    buildPages();
+    currentPage = Math.min(old, pages.length - 1);
+    renderPage(0);
+  }, 200);
+});
 <\/script>
 </body>
 </html>`;
 }
 
-function generate() {
-  const title    = document.getElementById('title').value.trim() || 'Adsız Kitab';
-  const author   = document.getElementById('author').value.trim();
-  const content  = document.getElementById('content').value;
-  const theme    = document.getElementById('theme').value;
-  const fontSize = document.getElementById('fontsize').value;
-  const wpp      = parseInt(document.getElementById('wordsperpage').value);
-  const keyboard = document.getElementById('keyboard').value;
-
-  if (!content.trim()) { alert('Zəhmət olmasa mətni daxil edin!'); return; }
-
-  const html = buildHTML(title, author, content, theme, fontSize, wpp, keyboard);
-
-  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+function download() {
+  const title = document.getElementById('title').value.trim();
+  const content = document.getElementById('content').value.trim();
+  if (!title || !content) { alert('Zəhmət olmasa başlıq və məzmunu doldurun.'); return; }
+  const html = buildHTML(title, content);
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = slugify(title) + '.html';
+  a.href = url;
+  a.download = (slugify(title) || 'kitab') + '.html';
   a.click();
-  URL.revokeObjectURL(a.href);
-
-  const paras = smartFormat(content);
-  const pages = paginate(paras, wpp);
-  document.getElementById('preview-info').textContent = a.download + ' · ' + pages.length + ' səhifə';
-  document.getElementById('preview-frame').srcdoc = html;
-  const wrap = document.getElementById('preview-wrap');
-  wrap.style.display = 'block';
-  wrap.scrollIntoView({behavior:'smooth', block:'start'});
+  URL.revokeObjectURL(url);
 }
 </script>
 </body>
